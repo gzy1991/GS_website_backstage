@@ -5,26 +5,19 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import net.gslab.entity.News;
-import net.gslab.entity.User;
 import net.gslab.service.NewsService;
-import net.gslab.setting.CommonConstant;
-import net.gslab.setting.Page;
 
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller(value="newsController")
 @RequestMapping("/news")
 public class NewsController extends BaseController{
-    private int tableIndex=CommonConstant.NEWS;
+
 	@Resource(name="newsServiceImpl")
 	private NewsService newsService;
 	
@@ -82,10 +75,4 @@ public class NewsController extends BaseController{
 		return "showNews";
 	}
 	*/
-	@RequestMapping(value = "/getPage", method = RequestMethod.GET)
-	public @ResponseBody Page<News>  list(HttpServletRequest request,
-			HttpServletResponse response,@RequestParam(value="pg")Integer pg) {
-		System.out.println(pg);
-		return newsService.getPage(pg,tableIndex);
-	}
 }
