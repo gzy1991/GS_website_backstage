@@ -101,10 +101,9 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		String table=CommonConstant.TABLE[tableIndex];
 		int pgsz=CommonConstant.PAGE_SIZE[tableIndex];
 		String hql="from "+table;
-		int total=baseDao.getCount(table);
 		int offset=(pageIndex-1)*pgsz;
-		List list=baseDao.getListForPage(hql, offset, pgsz);
-		return new Page(total,list);
+		return baseDao.getPage(hql, offset, pgsz);
+		
 	}
 
 	@Override
@@ -112,10 +111,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		// TODO Auto-generated method stub
 		String table=CommonConstant.TABLE[tableIndex];
 		int pgsz=CommonConstant.PAGE_SIZE[tableIndex];
-		int total=baseDao.getCount(table);
 		int offset=(pageIndex-1)*pgsz;
-		List list=baseDao.getListForPage(hql, offset, pgsz);
-		return new Page(total,list);
+		return baseDao.getPage(hql, offset, pgsz);
 	}
 
 	

@@ -7,15 +7,18 @@ import java.util.List;
 import javax.annotation.Resource;
 
 
+
 import net.gslab.dao.impl.BoardDaoImpl;
 import net.gslab.entity.Board;
 
+
+import net.gslab.setting.Page;
 
 import org.junit.Test;
 
 
 public class BoardDaoTest extends JUnitDaoBase {  
-    @Resource(name="boardDaoImpl") 
+	@Resource(name="boardDaoImpl") 
     private BoardDaoImpl borderDao;  
   
       
@@ -33,8 +36,10 @@ public class BoardDaoTest extends JUnitDaoBase {
 //    	System.out.println(boardTemp.getBoardName());
     	List<Board> boards = new ArrayList<Board>();
     	//boards=borderDao.find("from Board");
-    	System.out.println("Board has "+borderDao.getCount("Board"));
-    	boards = borderDao.getListForPage("from Board",1,2);
+    	
+    	Page<Board> page= borderDao.getPage("from Board b where b.boardName like '%new%'",0,2);
+    	System.out.println("Board has "+page.getTotalCount());
+    	boards=page.getData();
     	for(Board temp:boards){
     		System.out.println(temp.getBoardName());
     	}

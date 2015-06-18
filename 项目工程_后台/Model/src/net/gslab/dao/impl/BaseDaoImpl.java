@@ -168,8 +168,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 
 	@Override
-	public List getListForPage(final String hql, final int offset, final int length) {
+	public Page getPage(final String hql, final int offset, final int length) {
 		// TODO Auto-generated method stub
+		int total=getCount(hql);
 		 List list = getHibernateTemplate().executeFind(new HibernateCallback() {     
 			    public Object doInHibernate(Session session)     
 			      throws HibernateException, SQLException {     
@@ -180,17 +181,16 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			     return list;     
 			    }     
 			   });     
-			   return list;  
+		 return new Page(total,list);
 	}
 
 
 
 	@Override
-	public int getCount(String table) {
+	public int getCount(String hql) {
 		// TODO Auto-generated method stub
-		String hql="select count(*) from "+table;
+		hql="select count(*) "+hql; 
 		List list=find(hql);
 		return Integer.parseInt(list.get(0).toString());
-	
 	}
 }
