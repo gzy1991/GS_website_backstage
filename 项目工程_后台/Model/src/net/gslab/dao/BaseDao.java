@@ -15,8 +15,9 @@ public interface BaseDao<T> {
 
 	public abstract void update(T entity);
 
-	public abstract List find(String hql);
+	public abstract List<T> find(String hql);
 
-	public abstract List find(String hql, Object... params);
-
+	public abstract List<T> find(String hql, Object... params);
+	public abstract int getCount(String table);
+    public abstract List getListForPage(final String hql,final int offset,final int length);
 }
